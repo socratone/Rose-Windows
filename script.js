@@ -101,6 +101,13 @@ function clickNumButton() {
 }
 numButton.addEventListener('click', clickNumButton);
 
+// 엔터 키를 눌렀을 때 클릭 버튼을 누른 것과 같다.
+numInput.addEventListener('keypress', function(event) {
+  if(event.key === 'Enter') {
+    clickNumButton();
+  }
+});
+
 let hasMouseDown = false;
 function mouseDown() {
   hasMouseDown = true;
