@@ -52,7 +52,7 @@ function paint135Line() {
   ctx.stroke();
 }
 
-// 클릭 버튼을 클릭했을 때 (숫자 얻어오기)
+// 클릭 버튼을 클릭했을 때, ele를 지우고 선을 그린다.
 const numButton = document.getElementById('numButton');
 function clickNumButton() {
   const num = Number(numInput.value);
@@ -82,19 +82,34 @@ function clickNumButton() {
 }
 numButton.addEventListener('click', clickNumButton);
 
-
-
-
-
-// // 연습선
-// ctx.beginPath();
-// ctx.moveTo(250, 250);
-// ctx.lineTo(500, 80);
-// ctx.stroke();
-
-function onMouseMove() {
-    const x = event.offsetX;
-    const y = event.offsetY;
-    console.log(x, y);
+let hasMouseDown = false;
+function mouseDown() {
+  hasMouseDown = true;
 }
-canvas.addEventListener('mousemove', onMouseMove);
+function mouseUp() {
+  hasMouseDown = false;
+}
+function mouseOut() {
+  hasMouseDown = false;
+}
+
+// 마우스를 클릭해서 드래그할 때 그림을 그린다.
+let paintEnable = false;
+
+function mouseMove(event) {
+  const x = event.offsetX;
+  const y = event.offsetY;
+  // 클릭할 때, 캔버스 위에 있을 때 통과
+  if(hasMouseDown) {
+    ctx.lineTo(x, y);
+    ctx.stroke();
+  } else {
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+  }
+}
+canvas.addEventListener('mousemove', mouseMove);
+canvas.addEventListener('mousedown', mouseDown);
+canvas.addEventListener('mouseup', mouseUp);
+canvas.addEventListener('mouseout', mouseOut);
+
