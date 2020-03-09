@@ -1,0 +1,16 @@
+#frame {
+    width: 1fr;
+    height: 1fr;
+    /* border: solid 3px blue; */
+    display: grid;
+    justify-content: center;
+}
+
+#canvas {
+    justify-content: space-between;
+    width: 500px;
+    height: 500px;
+    border-radius: 250px;
+    border: solid 3px gray;
+    background-color: white;
+}
