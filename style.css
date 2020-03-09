@@ -1,13 +1,19 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    /* border: blueviolet solid 5px; */
+}
 #frame {
     width: 1fr;
-    height: 1fr;
+    height: 100%;
     /* border: solid 3px blue; */
     display: grid;
     justify-content: center;
+    align-content: center;
 }
 
 #canvas {
-    justify-content: space-between;
     width: 500px;
     height: 500px;
     border-radius: 250px;
