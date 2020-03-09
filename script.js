@@ -23,28 +23,25 @@ function clickNumInput() {
 }
 numInput.addEventListener('click', clickNumInput);
 
+// 원지름 그리는 함수
 function paint90Line() {
-  // 세로선
   ctx.beginPath();
   ctx.moveTo(250, 0);
   ctx.lineTo(250, 500);
   ctx.stroke();
 }
-
 function paint180Line() {
   ctx.beginPath();
   ctx.moveTo(0, 250);
   ctx.lineTo(500, 250);
   ctx.stroke();
 }
-
 function paint45Line() {
   ctx.beginPath();
   ctx.moveTo(0, 0);
   ctx.lineTo(500, 500);
   ctx.stroke();
 }
-
 function paint135Line() {
   ctx.beginPath();
   ctx.moveTo(0, 500);
@@ -92,9 +89,6 @@ function mouseUp() {
 function mouseOut() {
   hasMouseDown = false;
 }
-
-// 마우스를 클릭해서 드래그할 때 그림을 그린다.
-let paintEnable = false;
 
 function mouseMove(event) {
   const x = event.offsetX;
