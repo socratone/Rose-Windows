@@ -4,19 +4,52 @@ html, body {
     padding: 0;
     /* border: blueviolet solid 5px; */
 }
-#frame {
-    width: 1fr;
-    height: 100%;
-    /* border: solid 3px blue; */
+body {
+
     display: grid;
+    grid-auto-flow: row;
+    justify-content: center;
+    align-content: center;
+}
+#grid {
+    /* background-color: rgb(192, 192, 192); */
+    gap: 10px;
+    grid-template-columns: min-content;
+    grid-template-rows: 50px min-content 50px;
+    height: 100%;
+    display: grid;
+    grid-auto-flow: row;
     justify-content: center;
     align-content: center;
 }
 
+#grid1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 10px;
+}
+
+#numInput {
+    border: solid gray 2px;
+    font-size: 20px;
+    color: rgb(194, 193, 193);
+    text-align: center;
+    border-radius: 10px;
+}
+
+#numButton {
+    border: solid gray 2px;
+    background-color: rgb(235, 235, 235);
+    font-size: 20px;
+    border-radius: 10px;
+}
+
 #canvas {
-    width: 500px;
-    height: 500px;
-    border-radius: 250px;
-    border: solid 3px gray;
+    width: 600px;
+    height: 600px;
+    border-radius: 300px;
+    border: solid 2px gray;
     background-color: white;
+    
 }
