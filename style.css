@@ -49,11 +49,18 @@ body {
     border-radius: 10px;
 }
 
-#canvas {
+#canvasGrid {
+    display: grid;
+}
+
+.canvas {
+    grid-column: 1; /* 겹치게 하는 옵션 */
+    grid-row: 1; /* 겹치게 하는 옵션 */
     width: 500px;
     height: 500px;
     border-radius: 250px;
+}
+
+.canvasBorder {
     border: solid 2px gray;
-    background-color: white;
-    
 }
