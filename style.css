@@ -59,8 +59,9 @@ body {
     width: 500px;
     height: 500px;
     border-radius: 250px;
-}
-
-.canvasBorder {
     border: solid 2px gray;
 }
+
+/* .canvasBorder {
+    
+} */
