@@ -61,3 +61,25 @@ body {
     border-radius: 250px;
     border: solid 2px gray;
 }
+
+#backCanvas {
+    grid-column: 1; /* 겹치게 하는 옵션 */
+    grid-row: 1; /* 겹치게 하는 옵션 */
+    width: 500px;
+    height: 500px;
+    border-radius: 250px;
+    border: solid 2px gray;
+}
+
+#grid3 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.colorButton {
+    /* border: solid 1px gray; */
+    
+    border-radius: 25px;
+    width: 50px;
+    height: 50px;
+}

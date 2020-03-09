@@ -1,10 +1,11 @@
+let color = 'black';
 // 초기값
 let canvas = document.getElementsByClassName('canvas');
 let ctx = [];
 ctx[0] = canvas[0].getContext('2d');
 canvas[0].width = 500;
 canvas[0].height = 500;
-ctx[0].strokeStyle = 'black';
+ctx[0].strokeStyle = color;
 ctx[0].lineWidth = 1;
 
 // 원점 그리기
@@ -61,7 +62,7 @@ function addMirror(divNum) {
     ctx[1] = mirror[1].getContext('2d');
     mirror[1].width = 500;
     mirror[1].height = 500;
-    ctx[1].strokeStyle = 'blue';
+    ctx[1].strokeStyle = color;
     ctx[1].lineWidth = 1;
   }
   // todo 4, 8도 만들기
@@ -107,6 +108,17 @@ numInput.addEventListener('keypress', function(event) {
     clickNumButton();
   }
 });
+
+// stroke 색깔 바꾸기
+const colorButton = document.getElementsByClassName('colorButton');
+for(let i = 0; i < colorButton.length; i++) {
+  colorButton[i].addEventListener('click', function() {
+    color = colorButton[i].style.backgroundColor;
+    for(let j = 0; j < ctx.length; j++) {
+      if(ctx[j]) { ctx[j].strokeStyle = color; }
+    }
+  });
+}
 
 let hasMouseDown = false;
 function mouseDown() {
