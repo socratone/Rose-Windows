@@ -26,29 +26,34 @@ function clickNumInput() {
 numInput.addEventListener('click', clickNumInput);
 
 // 원지름 그리는 함수
+function paintBlackStroke() {
+  ctx[0].strokeStyle = 'black';
+  ctx[0].stroke();
+  ctx[0].strokeStyle = color;
+}
 function paint90Line() {
   ctx[0].beginPath();
   ctx[0].moveTo(250, 0);
   ctx[0].lineTo(250, 500);
-  ctx[0].stroke();
+  paintBlackStroke();
 }
 function paint180Line() {
   ctx[0].beginPath();
   ctx[0].moveTo(0, 250);
   ctx[0].lineTo(500, 250);
-  ctx[0].stroke();
+  paintBlackStroke();
 }
 function paint45Line() {
   ctx[0].beginPath();
   ctx[0].moveTo(0, 0);
   ctx[0].lineTo(500, 500);
-  ctx[0].stroke();
+  paintBlackStroke();
 }
 function paint135Line() {
   ctx[0].beginPath();
   ctx[0].moveTo(0, 500);
   ctx[0].lineTo(500, 0);
-  ctx[0].stroke();
+  paintBlackStroke();
 }
 
 // 거울 페인터
