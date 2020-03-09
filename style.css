@@ -5,7 +5,6 @@ html, body {
     /* border: blueviolet solid 5px; */
 }
 body {
-
     display: grid;
     grid-auto-flow: row;
     justify-content: center;
@@ -33,9 +32,14 @@ body {
 #numInput {
     border: solid gray 2px;
     font-size: 20px;
-    color: rgb(194, 193, 193);
     text-align: center;
     border-radius: 10px;
+}
+.fontColorGray {
+    color: rgb(194, 193, 193);
+}
+.fontColorBlack {
+    color: black;
 }
 
 #numButton {
@@ -46,9 +50,9 @@ body {
 }
 
 #canvas {
-    width: 600px;
-    height: 600px;
-    border-radius: 300px;
+    width: 500px;
+    height: 500px;
+    border-radius: 250px;
     border: solid 2px gray;
     background-color: white;
     
