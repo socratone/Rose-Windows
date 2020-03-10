@@ -35,13 +35,6 @@ function clickNumInput() {
 }
 numInput.addEventListener('click', clickNumInput);
 
-// 45도 돌아가게 해주는 함수
-function rotateR45(x, y) {
-  let result = [];
-  
-  return result;
-}
-
 // 원지름 그리는 함수
 function paintBlackStroke() {
   bgCtx.strokeStyle = 'black';
@@ -78,6 +71,11 @@ function degreesToRadians(degrees) {
   return degrees * (pi / 180);
 }
 
+function radiansToDegrees(radians) {
+  const pi = Math.PI;
+  return radians * (180 / pi);
+}
+
 function paintDegreeLine(degree) {
   degree = degree - 90;
   bgCtx.beginPath();
@@ -99,32 +97,23 @@ function activeMirror(i) {
   ctx[i].lineWidth = 1;
 }
 
-// 거울 페인터
+function makePainter(divNum) {
+  for(let i = 1; i < divNum; i++) {
+    activeMirror(i);
+  }
+}
+
+// painter를 생성한다.
 let mirror = [];
 function addMirror(divNum) {
   if(divNum === 2) {
-    activeMirror(1);
+    makePainter(divNum);
   } else if(divNum === 4) {
-    activeMirror(1);
-    activeMirror(2);
-    activeMirror(3);
+    makePainter(divNum);
   } else if(divNum === 8) {
-    activeMirror(1);
-    activeMirror(2);
-    activeMirror(3);
-    activeMirror(4);
-    activeMirror(5);
-    activeMirror(6);
-    activeMirror(7);
+    makePainter(divNum);
   } else if(divNum === 16) {
-    // todo 15개 만들어야 함
-    activeMirror(1);
-    // activeMirror(2);
-    // activeMirror(3);
-    // activeMirror(4);
-    // activeMirror(5);
-    // activeMirror(6);
-    // activeMirror(7);
+    makePainter(divNum);
   }
 }
 
@@ -234,6 +223,7 @@ function mouseOut() {
   hasMouseDown = false;
 }
 
+// 좌표 뒤집는 함수
 function reverse(num) {
   let result;
   if(num < 250) {
@@ -242,6 +232,57 @@ function reverse(num) {
     result = 250 - (num - 250);
   }
   return result;
+}
+
+// 좌표 rotate 함수
+function rotateX(degree, x, y) {
+  // console.log('x: ', x);
+  let triangleX;
+  let triangleY;
+  if(x > 250) {
+    triangleX = x - 250;
+  } else {
+    triangleX = 250 - x;
+  }
+  if(y > 250) {
+    triangleY = y - 250;
+  } else {
+    triangleY = 250 - y;
+  }
+  let radius = Math.sqrt(Math.pow(triangleX, 2) + Math.pow(triangleY, 2));
+  let triangleDegree = radiansToDegrees(Math.atan(triangleY / triangleX));
+  // console.log('삼각형x:', triangleX, '삼각형y:', triangleY, '반지름:', radius, '90-각도:', 90 - triangleDegree);
+  return 250 + Math.floor(radius * Math.sin(degreesToRadians(90 - triangleDegree + degree)));
+}
+function rotateY(degree, x, y) {
+  y = 500 - y;
+  // console.log('y : ', y);
+  let triangleX;
+  let triangleY;
+  if(x > 250) {
+    triangleX = x - 250;
+  } else {
+    triangleX = 250 - x;
+  }
+  if(y > 250) {
+    triangleY = y - 250;
+  } else {
+    triangleY = 250 - y;
+  }
+  let radius = Math.sqrt(Math.pow(triangleX, 2) + Math.pow(triangleY, 2));
+  let triangleDegree = radiansToDegrees(Math.atan(triangleY / triangleX));
+  console.log('삼각형x:', triangleX, '삼각형y:', triangleY, '반지름:', radius, '90-각도:', 90 - triangleDegree);
+  return 250 - Math.floor(radius * Math.cos(degreesToRadians(90 - triangleDegree + degree)));
+}
+/* 임시 */
+function paintDegreeLine(degree) {
+  degree = degree - 90;
+  bgCtx.beginPath();
+  bgCtx.moveTo(250, 250);
+  let x = Math.cos(degreesToRadians(degree)) * 250;
+  let y = Math.sin(degreesToRadians(degree)) * 250;
+  bgCtx.lineTo(x + 250, y + 250);
+  paintBlackStroke();
 }
 
 function mouseMove(event) {
@@ -285,6 +326,8 @@ function mouseMove(event) {
       }
     } else if(divNum === 16) {
       // todo
+      ctx[1].lineTo(rotateX(22.5, x, y), rotateY(22.5, x, y));
+      ctx[1].stroke(); 
     }
     if(hasMouseDown) { ctx[0].stroke(); } // 그리기 허용 영역을 넘어가면 메인 stroke 발동 x
   
@@ -314,6 +357,10 @@ function mouseMove(event) {
       ctx[7].moveTo(reverse(x), reverse(y));
     } else if(divNum === 16) {
       // todo
+      for(let i = 1; i < divNum; i++) {
+        ctx[i].beginPath();
+      }
+      ctx[1].moveTo(rotateX(22.5, x, y), rotateY(22.5, x, y));
     }
   }
 }
