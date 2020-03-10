@@ -205,19 +205,17 @@ function mouseMove(event) {
   if(hasMouseDown) {
     ctx[0].lineTo(x, y);
     if(divNum === 2) {
-      // 영역을 넘어가면 hasMouseDown = true;
       ctx[1].lineTo(reverse(x), y);
-      if(x < 250) { hasMouseDown = false; }
+      if(x < 250) { hasMouseDown = false; } // 그리기 허용 영역을 넘어갔을 때 마우스 클릭이 풀림
       if(hasMouseDown) { ctx[1].stroke(); }
     } else if(divNum === 4) {
       ctx[1].lineTo(reverse(x), y);
       ctx[2].lineTo(x, reverse(y));
       ctx[3].lineTo(reverse(x), reverse(y));
-      ctx[1].stroke();
-      ctx[2].stroke();
-      ctx[3].stroke();
+      if(x < 250 || y > 250) { hasMouseDown = false; }
+      if(hasMouseDown) { ctx[1].stroke(); ctx[2].stroke(); ctx[3].stroke(); }
     }
-    if(hasMouseDown) { ctx[0].stroke(); }
+    if(hasMouseDown) { ctx[0].stroke(); } // 그리기 허용 영역을 넘어가면 메인 stroke 발동 x
   } else {
     ctx[0].beginPath();
     ctx[0].moveTo(x, y);
