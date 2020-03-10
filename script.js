@@ -193,6 +193,10 @@ function reverse(num) {
   return result;
 }
 
+function reverse45(num) {
+
+}
+
 function mouseMove(event) {
   const x = event.offsetX;
   const y = event.offsetY;
@@ -200,10 +204,11 @@ function mouseMove(event) {
   // 클릭할 때, 캔버스 위에 있을 때 통과
   if(hasMouseDown) {
     ctx[0].lineTo(x, y);
-    ctx[0].stroke();
     if(divNum === 2) {
+      // 영역을 넘어가면 hasMouseDown = true;
       ctx[1].lineTo(reverse(x), y);
-      ctx[1].stroke();
+      if(x < 250) { hasMouseDown = false; }
+      if(hasMouseDown) { ctx[1].stroke(); }
     } else if(divNum === 4) {
       ctx[1].lineTo(reverse(x), y);
       ctx[2].lineTo(x, reverse(y));
@@ -212,6 +217,7 @@ function mouseMove(event) {
       ctx[2].stroke();
       ctx[3].stroke();
     }
+    if(hasMouseDown) { ctx[0].stroke(); }
   } else {
     ctx[0].beginPath();
     ctx[0].moveTo(x, y);
