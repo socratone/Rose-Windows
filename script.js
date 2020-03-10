@@ -1,3 +1,12 @@
+const canvasGrid = document.getElementById('canvasGrid');
+
+const backGroundCanvas = document.getElementById('backGroundCanvas');
+const bgCtx = backGroundCanvas.getContext('2d');
+backGroundCanvas.width = 500;
+backGroundCanvas.height = 500;
+bgCtx.strokeStyle = 'gray';
+bgCtx.lineWidth = 1;
+
 let color = 'black';
 // 초기값
 let canvas = document.getElementsByClassName('canvas');
@@ -9,9 +18,9 @@ ctx[0].strokeStyle = color;
 ctx[0].lineWidth = 1;
 
 // 원점 그리기
-ctx[0].beginPath();
-ctx[0].arc(250, 250, 1, 0, 2 * Math.PI);
-ctx[0].stroke();
+bgCtx.beginPath();
+bgCtx.arc(250, 250, 1, 0, 2 * Math.PI);
+bgCtx.stroke();
 
 // numInput을 클릭했을 때 글자가 없어진다.
 const numInput = document.getElementById('numInput');
@@ -27,32 +36,32 @@ numInput.addEventListener('click', clickNumInput);
 
 // 원지름 그리는 함수
 function paintBlackStroke() {
-  ctx[0].strokeStyle = 'black';
-  ctx[0].stroke();
-  ctx[0].strokeStyle = color;
+  bgCtx.strokeStyle = 'black';
+  bgCtx.stroke();
+  bgCtx.strokeStyle = color;
 }
 function paint90Line() {
-  ctx[0].beginPath();
-  ctx[0].moveTo(250, 0);
-  ctx[0].lineTo(250, 500);
+  bgCtx.beginPath();
+  bgCtx.moveTo(250, 0);
+  bgCtx.lineTo(250, 500);
   paintBlackStroke();
 }
 function paint180Line() {
-  ctx[0].beginPath();
-  ctx[0].moveTo(0, 250);
-  ctx[0].lineTo(500, 250);
+  bgCtx.beginPath();
+  bgCtx.moveTo(0, 250);
+  bgCtx.lineTo(500, 250);
   paintBlackStroke();
 }
 function paint45Line() {
-  ctx[0].beginPath();
-  ctx[0].moveTo(0, 0);
-  ctx[0].lineTo(500, 500);
+  bgCtx.beginPath();
+  bgCtx.moveTo(0, 0);
+  bgCtx.lineTo(500, 500);
   paintBlackStroke();
 }
 function paint135Line() {
-  ctx[0].beginPath();
-  ctx[0].moveTo(0, 500);
-  ctx[0].lineTo(500, 0);
+  bgCtx.beginPath();
+  bgCtx.moveTo(0, 500);
+  bgCtx.lineTo(500, 0);
   paintBlackStroke();
 }
 
@@ -69,7 +78,6 @@ function activeMirror(i) {
 
 // 거울 페인터
 let mirror = [];
-const canvasGrid = document.getElementById('canvasGrid');
 function addMirror(divNum) {
   if(divNum === 2) {
     activeMirror(1);

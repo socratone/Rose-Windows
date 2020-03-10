@@ -76,7 +76,7 @@ body {
     border: solid 2px gray;
 }
 
-#backCanvas {
+#backGroundCanvas {
     grid-column: 1; /* 겹치게 하는 옵션 */
     grid-row: 1; /* 겹치게 하는 옵션 */
     width: 500px;
