@@ -81,11 +81,31 @@ function addSaveButton() { // 캡쳐 버튼 생성
   grid1.append(saveButton);
 }
 
+// 지우기 버튼을 눌렀을 때, 다 지우고 분할획만 그려 넣는다.
+function clickEraseButton() {
+  for(let i = 0; i < ctx.length; i++) {
+    ctx[i].clearRect(0, 0, 500, 500);
+  }
+  if(divNum === 2) {
+    paint90Line();
+  } else if(divNum === 4) {
+    paint90Line();
+    paint180Line();
+  } else if(divNum === 8) {
+    paint90Line();
+    paint180Line();
+    paint45Line();
+    paint135Line();
+  }
+}
+
+let eraseButton;
 function addEraseButton() { // 지우기 버튼 생성
-  const eraseButton = document.createElement('button');
+  eraseButton = document.createElement('button');
   eraseButton.id = 'eraseButton';
   eraseButton.innerText = '지우기';
   grid1.append(eraseButton);
+  eraseButton.addEventListener('click', clickEraseButton);
 }
 
 function replaceButtons() {
@@ -191,7 +211,7 @@ canvas[0].addEventListener('mousedown', mouseDown);
 canvas[0].addEventListener('mouseup', mouseUp);
 canvas[0].addEventListener('mouseout', mouseOut);
 
-// 지우기 버튼을 눌렀을 때, 다 지우고 분할획만 그려 넣는다.
+
 
 
 
