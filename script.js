@@ -73,8 +73,17 @@ function addMirror(divNum) {
   // todo 4, 8도 만들기
 }
 
+// 지우기 버튼 생성
+const grid1 = document.getElementById('grid1');
+function addEraseButton() {
+  const eraseButton = document.createElement('button');
+  eraseButton.id = 'eraseButton';
+  eraseButton.innerText = '지우기';
+  grid1.append(eraseButton);
+}
+
 let divNum;
-// 클릭 버튼을 클릭했을 때, ele를 지우고 선을 그린다.
+// 클릭 버튼을 클릭했을 때, ele를 지우고 선을 그리고 지우기 버튼을 만든다.
 const numButton = document.getElementById('numButton');
 function clickNumButton() {
   divNum = Number(numInput.value);
@@ -84,12 +93,14 @@ function clickNumButton() {
       addMirror(divNum);
       numInput.remove();
       numButton.remove();
+      addEraseButton();
     } else if(divNum === 4) {
       paint90Line();
       paint180Line();
       addMirror(divNum);
       numInput.remove();
       numButton.remove();
+      addEraseButton();
     } else if(divNum === 8) {
       paint90Line();
       paint180Line();
@@ -98,6 +109,7 @@ function clickNumButton() {
       addMirror(divNum);
       numInput.remove();
       numButton.remove();
+      addEraseButton();
     } else {
       alert('2, 4, 8 중의 숫자를 입력해주세요.')
     }
@@ -149,6 +161,7 @@ function reverse90(num) {
 function mouseMove(event) {
   const x = event.offsetX;
   const y = event.offsetY;
+  // console.log(x , y);
   // 클릭할 때, 캔버스 위에 있을 때 통과
   if(hasMouseDown) {
     ctx[0].lineTo(x, y);
@@ -170,4 +183,9 @@ canvas[0].addEventListener('mousemove', mouseMove);
 canvas[0].addEventListener('mousedown', mouseDown);
 canvas[0].addEventListener('mouseup', mouseUp);
 canvas[0].addEventListener('mouseout', mouseOut);
+
+// 지우기 버튼을 눌렀을 때, 다 지우고 분할획만 그려 넣는다.
+
+
+
 

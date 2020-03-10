@@ -49,6 +49,17 @@ body {
     border-radius: 10px;
 }
 
+#eraseButton {
+    border: solid gray 2px;
+    background-color: rgb(235, 235, 235);
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+#captureButton {
+
+}
+
 #canvasGrid {
     display: grid;
 }
