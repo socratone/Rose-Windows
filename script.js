@@ -73,13 +73,26 @@ function addMirror(divNum) {
   // todo 4, 8도 만들기
 }
 
-// 지우기 버튼 생성
 const grid1 = document.getElementById('grid1');
-function addEraseButton() {
+function addSaveButton() { // 캡쳐 버튼 생성
+  const saveButton = document.createElement('button');
+  saveButton.id = 'saveButton';
+  saveButton.innerText = '저장하기';
+  grid1.append(saveButton);
+}
+
+function addEraseButton() { // 지우기 버튼 생성
   const eraseButton = document.createElement('button');
   eraseButton.id = 'eraseButton';
   eraseButton.innerText = '지우기';
   grid1.append(eraseButton);
+}
+
+function replaceButtons() {
+  numInput.remove();
+  numButton.remove();
+  addSaveButton();
+  addEraseButton();
 }
 
 let divNum;
@@ -91,25 +104,19 @@ function clickNumButton() {
     if(divNum === 2) {
       paint90Line();
       addMirror(divNum);
-      numInput.remove();
-      numButton.remove();
-      addEraseButton();
+      replaceButtons();
     } else if(divNum === 4) {
       paint90Line();
       paint180Line();
       addMirror(divNum);
-      numInput.remove();
-      numButton.remove();
-      addEraseButton();
+      replaceButtons();
     } else if(divNum === 8) {
       paint90Line();
       paint180Line();
       paint45Line();
       paint135Line();
       addMirror(divNum);
-      numInput.remove();
-      numButton.remove();
-      addEraseButton();
+      replaceButtons();
     } else {
       alert('2, 4, 8 중의 숫자를 입력해주세요.')
     }
