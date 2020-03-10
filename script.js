@@ -1,5 +1,6 @@
 const canvasGrid = document.getElementById('canvasGrid');
 
+// backGroundCanvas 초기 설정
 const backGroundCanvas = document.getElementById('backGroundCanvas');
 const bgCtx = backGroundCanvas.getContext('2d');
 backGroundCanvas.width = 500;
@@ -8,7 +9,7 @@ bgCtx.strokeStyle = 'gray';
 bgCtx.lineWidth = 1;
 
 let color = 'black';
-// 초기값
+// 메인 canvas 초기 설정
 let canvas = document.getElementsByClassName('canvas');
 let ctx = [];
 ctx[0] = canvas[0].getContext('2d');
@@ -33,6 +34,13 @@ function clickNumInput() {
   } 
 }
 numInput.addEventListener('click', clickNumInput);
+
+// 45도 돌아가게 해주는 함수
+function rotateR45(x, y) {
+  let result = [];
+  
+  return result;
+}
 
 // 원지름 그리는 함수
 function paintBlackStroke() {
@@ -65,6 +73,22 @@ function paint135Line() {
   paintBlackStroke();
 }
 
+function degreesToRadians(degrees) {
+  const pi = Math.PI;
+  return degrees * (pi / 180);
+}
+
+function paint27Line() {
+  let degree = 22.5 - 90;
+  bgCtx.beginPath();
+  bgCtx.moveTo(250, 250);
+  let x = Math.cos(degreesToRadians(degree)) * 250;
+  let y = Math.sin(degreesToRadians(degree)) * 250;
+  bgCtx.lineTo(x + 250, y + 250);
+  paintBlackStroke();
+}
+// todo line 만들기
+
 function activeMirror(i) {
   mirror[i] = document.createElement('canvas');
   mirror[i].classList.add('canvas');
@@ -93,6 +117,15 @@ function addMirror(divNum) {
     activeMirror(5);
     activeMirror(6);
     activeMirror(7);
+  } else if(divNum === 16) {
+    // todo 15개 만들어야 함
+    activeMirror(1);
+    // activeMirror(2);
+    // activeMirror(3);
+    // activeMirror(4);
+    // activeMirror(5);
+    // activeMirror(6);
+    // activeMirror(7);
   }
 }
 
@@ -119,6 +152,8 @@ function clickEraseButton() {
     paint180Line();
     paint45Line();
     paint135Line();
+  } else if(divNum === 8) {
+    // todo
   }
 }
 
@@ -160,7 +195,16 @@ function clickNumButton() {
       paint135Line();
       addMirror(divNum);
       replaceButtons();
-    } else {
+    } else if(divNum === 16) {
+      // todo1
+      paint90Line();
+      paint180Line();
+      paint45Line();
+      paint135Line();
+      paint27Line();
+      addMirror(divNum);
+      replaceButtons();
+    }  else {
       alert('2, 4, 8 중의 숫자를 입력해주세요.')
     }
   } else {
@@ -208,10 +252,6 @@ function reverse(num) {
   return result;
 }
 
-function reverse45(num) {
-
-}
-
 function mouseMove(event) {
   const x = event.offsetX;
   const y = event.offsetY;
@@ -251,6 +291,8 @@ function mouseMove(event) {
         ctx[6].stroke();
         ctx[7].stroke(); 
       }
+    } else if(divNum === 16) {
+      // todo
     }
     if(hasMouseDown) { ctx[0].stroke(); } // 그리기 허용 영역을 넘어가면 메인 stroke 발동 x
   
@@ -278,6 +320,8 @@ function mouseMove(event) {
       ctx[5].moveTo(reverse(500 - y), reverse(x));
       ctx[6].moveTo(reverse(500 - y), x);
       ctx[7].moveTo(reverse(x), reverse(y));
+    } else if(divNum === 16) {
+      // todo
     }
   }
 }
