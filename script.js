@@ -77,8 +77,15 @@ function addMirror(divNum) {
     activeMirror(1);
     activeMirror(2);
     activeMirror(3);
+  } else if(divNum === 8) {
+    activeMirror(1);
+    activeMirror(2);
+    activeMirror(3);
+    activeMirror(4);
+    activeMirror(5);
+    activeMirror(6);
+    activeMirror(7);
   }
-  // todo 4, 8도 만들기
 }
 
 const grid1 = document.getElementById('grid1');
@@ -202,33 +209,67 @@ function mouseMove(event) {
   const y = event.offsetY;
   // console.log(x , y);
   // 클릭할 때, 캔버스 위에 있을 때 통과
-  if(hasMouseDown) {
+  if(hasMouseDown) { // 마우스 클릭해서 그리기
     ctx[0].lineTo(x, y);
-    if(divNum === 2) {
+    if(divNum === 2) { // 2등분
       ctx[1].lineTo(reverse(x), y);
       if(x < 250) { hasMouseDown = false; } // 그리기 허용 영역을 넘어갔을 때 마우스 클릭이 풀림
       if(hasMouseDown) { ctx[1].stroke(); }
-    } else if(divNum === 4) {
+    } else if(divNum === 4) { // 4등분
       ctx[1].lineTo(reverse(x), y);
       ctx[2].lineTo(x, reverse(y));
       ctx[3].lineTo(reverse(x), reverse(y));
       if(x < 250 || y > 250) { hasMouseDown = false; }
-      if(hasMouseDown) { ctx[1].stroke(); ctx[2].stroke(); ctx[3].stroke(); }
+      if(hasMouseDown) { 
+        ctx[1].stroke(); 
+        ctx[2].stroke(); 
+        ctx[3].stroke(); 
+      }
+    } else if(divNum === 8) { // 8등분
+      ctx[1].lineTo(500 - y, reverse(x));
+      ctx[2].lineTo(500 - y, x);
+      ctx[3].lineTo(x, reverse(y));
+      ctx[4].lineTo(reverse(x), y);
+      ctx[5].lineTo(reverse(500 - y), reverse(x));
+      ctx[6].lineTo(reverse(500 - y), x);
+      ctx[7].lineTo(reverse(x), reverse(y));
+      if(x < 250 || reverse(y) < x) { hasMouseDown = false; }
+      if(hasMouseDown) {
+        ctx[1].stroke(); 
+        ctx[2].stroke();
+        ctx[3].stroke(); 
+        ctx[4].stroke(); 
+        ctx[5].stroke(); 
+        ctx[6].stroke();
+        ctx[7].stroke(); 
+      }
     }
     if(hasMouseDown) { ctx[0].stroke(); } // 그리기 허용 영역을 넘어가면 메인 stroke 발동 x
+  
   } else {
     ctx[0].beginPath();
     ctx[0].moveTo(x, y);
-    if(divNum === 2) {
+    if(divNum === 2) { // 2등분
       ctx[1].beginPath();
       ctx[1].moveTo(reverse(x), y);
-    } else if(divNum === 4) {
-      ctx[1].beginPath();
-      ctx[2].beginPath();
-      ctx[3].beginPath();
+    } else if(divNum === 4) { // 4등분
+      for(let i = 1; i < divNum; i++) {
+        ctx[i].beginPath();
+      }
       ctx[1].moveTo(reverse(x), y);
       ctx[2].moveTo(x, reverse(y));
       ctx[3].moveTo(reverse(x), reverse(y));
+    } else if(divNum === 8) { // 8등분
+      for(let i = 1; i < divNum; i++) {
+        ctx[i].beginPath();
+      }
+      ctx[1].moveTo(500 - y, reverse(x));
+      ctx[2].moveTo(500 - y, x);
+      ctx[3].moveTo(x, reverse(y));
+      ctx[4].moveTo(reverse(x), y);
+      ctx[5].moveTo(reverse(500 - y), reverse(x));
+      ctx[6].moveTo(reverse(500 - y), x);
+      ctx[7].moveTo(reverse(x), reverse(y));
     }
   }
 }
