@@ -236,7 +236,6 @@ function reverse(num) {
 
 // 좌표 rotate 함수
 function rotateX(degree, x, y) {
-  // console.log('x: ', x);
   let triangleX;
   let triangleY;
   if(x > 250) {
@@ -244,6 +243,7 @@ function rotateX(degree, x, y) {
   } else {
     triangleX = 250 - x;
   }
+
   if(y > 250) {
     triangleY = y - 250;
   } else {
@@ -256,7 +256,6 @@ function rotateX(degree, x, y) {
 }
 function rotateY(degree, x, y) {
   y = 500 - y;
-  // console.log('y : ', y);
   let triangleX;
   let triangleY;
   if(x > 250) {
@@ -264,6 +263,7 @@ function rotateY(degree, x, y) {
   } else {
     triangleX = 250 - x;
   }
+
   if(y > 250) {
     triangleY = y - 250;
   } else {
@@ -271,18 +271,8 @@ function rotateY(degree, x, y) {
   }
   let radius = Math.sqrt(Math.pow(triangleX, 2) + Math.pow(triangleY, 2));
   let triangleDegree = radiansToDegrees(Math.atan(triangleY / triangleX));
-  console.log('삼각형x:', triangleX, '삼각형y:', triangleY, '반지름:', radius, '90-각도:', 90 - triangleDegree);
+  // console.log('삼각형x:', triangleX, '삼각형y:', triangleY, '반지름:', radius, '90-각도:', 90 - triangleDegree);
   return 250 - Math.floor(radius * Math.cos(degreesToRadians(90 - triangleDegree + degree)));
-}
-/* 임시 */
-function paintDegreeLine(degree) {
-  degree = degree - 90;
-  bgCtx.beginPath();
-  bgCtx.moveTo(250, 250);
-  let x = Math.cos(degreesToRadians(degree)) * 250;
-  let y = Math.sin(degreesToRadians(degree)) * 250;
-  bgCtx.lineTo(x + 250, y + 250);
-  paintBlackStroke();
 }
 
 function mouseMove(event) {
@@ -326,8 +316,37 @@ function mouseMove(event) {
       }
     } else if(divNum === 16) {
       // todo
-      ctx[1].lineTo(rotateX(22.5, x, y), rotateY(22.5, x, y));
+      ctx[2].lineTo(rotateX(45, x, y), rotateY(45, x, y));
+      ctx[4].lineTo(rotateX(90, x, y), rotateY(90, x, y));
+      ctx[6].lineTo(rotateX(135, x, y), rotateY(135, x, y));
+      ctx[8].lineTo(rotateX(180, x, y), rotateY(180, x, y));
+      ctx[10].lineTo(rotateX(225, x, y), rotateY(225, x, y));
+      ctx[12].lineTo(rotateX(270, x, y), rotateY(270, x, y));
+      ctx[14].lineTo(rotateX(315, x, y), rotateY(315, x, y));
+      ctx[2].stroke(); 
+      ctx[4].stroke(); 
+      ctx[6].stroke(); 
+      ctx[8].stroke(); 
+      ctx[10].stroke(); 
+      ctx[12].stroke(); 
+      ctx[14].stroke(); 
+      const reverseX = 250 - (x - 250);
+      ctx[1].lineTo(reverseX, y);
+      ctx[3].lineTo(rotateX(-45, 500 - y, 500 - x), rotateY(-45, 500 - y, 500 - x));
+      ctx[5].lineTo(rotateX(0, 500 - y, 500 - x), rotateY(0, 500 - y, 500 - x));
+      ctx[7].lineTo(rotateX(45, 500 - y, 500 - x), rotateY(45, 500 - y, 500 - x));
+      ctx[9].lineTo(rotateX(90, 500 - y, 500 - x), rotateY(90, 500 - y, 500 - x));
+      ctx[11].lineTo(rotateX(135, 500 - y, 500 - x), rotateY(135, 500 - y, 500 - x));
+      ctx[13].lineTo(rotateX(180, 500 - y, 500 - x), rotateY(180, 500 - y, 500 - x));
+      ctx[15].lineTo(rotateX(225, 500 - y, 500 - x), rotateY(225, 500 - y, 500 - x));
       ctx[1].stroke(); 
+      ctx[3].stroke(); 
+      ctx[5].stroke(); 
+      ctx[7].stroke(); 
+      ctx[9].stroke(); 
+      ctx[11].stroke(); 
+      ctx[13].stroke(); 
+      ctx[15].stroke();
     }
     if(hasMouseDown) { ctx[0].stroke(); } // 그리기 허용 영역을 넘어가면 메인 stroke 발동 x
   
@@ -356,11 +375,25 @@ function mouseMove(event) {
       ctx[6].moveTo(reverse(500 - y), x);
       ctx[7].moveTo(reverse(x), reverse(y));
     } else if(divNum === 16) {
-      // todo
       for(let i = 1; i < divNum; i++) {
         ctx[i].beginPath();
       }
-      ctx[1].moveTo(rotateX(22.5, x, y), rotateY(22.5, x, y));
+      ctx[2].moveTo(rotateX(45, x, y), rotateY(45, x, y));
+      ctx[4].moveTo(rotateX(90, x, y), rotateY(90, x, y));
+      ctx[6].moveTo(rotateX(135, x, y), rotateY(135, x, y));
+      ctx[8].moveTo(rotateX(180, x, y), rotateY(180, x, y));
+      ctx[10].moveTo(rotateX(225, x, y), rotateY(225, x, y));
+      ctx[12].moveTo(rotateX(270, x, y), rotateY(270, x, y));
+      ctx[14].moveTo(rotateX(315, x, y), rotateY(315, x, y));
+      const reverseX = 250 - (x - 250);
+      ctx[1].moveTo(reverseX, y);
+      ctx[3].moveTo(rotateX(-45, 500 - y, 500 - x), rotateY(-45, 500 - y, 500 - x));
+      ctx[5].moveTo(rotateX(0, 500 - y, 500 - x), rotateY(0, 500 - y, 500 - x));
+      ctx[7].moveTo(rotateX(45, 500 - y, 500 - x), rotateY(45, 500 - y, 500 - x));
+      ctx[9].moveTo(rotateX(90, 500 - y, 500 - x), rotateY(90, 500 - y, 500 - x));
+      ctx[11].moveTo(rotateX(135, 500 - y, 500 - x), rotateY(135, 500 - y, 500 - x));
+      ctx[13].moveTo(rotateX(180, 500 - y, 500 - x), rotateY(180, 500 - y, 500 - x));
+      ctx[15].moveTo(rotateX(225, 500 - y, 500 - x), rotateY(225, 500 - y, 500 - x));
     }
   }
 }
@@ -368,9 +401,4 @@ canvas[0].addEventListener('mousemove', mouseMove);
 canvas[0].addEventListener('mousedown', mouseDown);
 canvas[0].addEventListener('mouseup', mouseUp);
 canvas[0].addEventListener('mouseout', mouseOut);
-
-
-
-
-
 
