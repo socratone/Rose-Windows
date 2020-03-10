@@ -56,19 +56,27 @@ function paint135Line() {
   paintBlackStroke();
 }
 
+function activeMirror(i) {
+  mirror[i] = document.createElement('canvas');
+  mirror[i].classList.add('canvas');
+  canvasGrid.prepend(mirror[i]);
+  ctx[i] = mirror[i].getContext('2d');
+  mirror[i].width = 500;
+  mirror[i].height = 500;
+  ctx[i].strokeStyle = color;
+  ctx[i].lineWidth = 1;
+}
+
 // 거울 페인터
 let mirror = [];
 const canvasGrid = document.getElementById('canvasGrid');
 function addMirror(divNum) {
   if(divNum === 2) {
-    mirror[1] = document.createElement('canvas');
-    mirror[1].classList.add('canvas');
-    canvasGrid.prepend(mirror[1]);
-    ctx[1] = mirror[1].getContext('2d');
-    mirror[1].width = 500;
-    mirror[1].height = 500;
-    ctx[1].strokeStyle = color;
-    ctx[1].lineWidth = 1;
+    activeMirror(1);
+  } else if(divNum === 4) {
+    activeMirror(1);
+    activeMirror(2);
+    activeMirror(3);
   }
   // todo 4, 8도 만들기
 }
@@ -175,7 +183,7 @@ function mouseOut() {
   hasMouseDown = false;
 }
 
-function reverse90(num) {
+function reverse(num) {
   let result;
   if(num < 250) {
     result = 250 - num + 250;
@@ -194,15 +202,29 @@ function mouseMove(event) {
     ctx[0].lineTo(x, y);
     ctx[0].stroke();
     if(divNum === 2) {
-      ctx[1].lineTo(reverse90(x), y);
+      ctx[1].lineTo(reverse(x), y);
       ctx[1].stroke();
+    } else if(divNum === 4) {
+      ctx[1].lineTo(reverse(x), y);
+      ctx[2].lineTo(x, reverse(y));
+      ctx[3].lineTo(reverse(x), reverse(y));
+      ctx[1].stroke();
+      ctx[2].stroke();
+      ctx[3].stroke();
     }
   } else {
     ctx[0].beginPath();
     ctx[0].moveTo(x, y);
     if(divNum === 2) {
       ctx[1].beginPath();
-      ctx[1].moveTo(reverse90(x), y);
+      ctx[1].moveTo(reverse(x), y);
+    } else if(divNum === 4) {
+      ctx[1].beginPath();
+      ctx[2].beginPath();
+      ctx[3].beginPath();
+      ctx[1].moveTo(reverse(x), y);
+      ctx[2].moveTo(x, reverse(y));
+      ctx[3].moveTo(reverse(x), reverse(y));
     }
   }
 }
