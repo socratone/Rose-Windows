@@ -78,8 +78,8 @@ function degreesToRadians(degrees) {
   return degrees * (pi / 180);
 }
 
-function paint27Line() {
-  let degree = 22.5 - 90;
+function paintDegreeLine(degree) {
+  degree = degree - 90;
   bgCtx.beginPath();
   bgCtx.moveTo(250, 250);
   let x = Math.cos(degreesToRadians(degree)) * 250;
@@ -87,7 +87,6 @@ function paint27Line() {
   bgCtx.lineTo(x + 250, y + 250);
   paintBlackStroke();
 }
-// todo line 만들기
 
 function activeMirror(i) {
   mirror[i] = document.createElement('canvas');
@@ -196,12 +195,18 @@ function clickNumButton() {
       addMirror(divNum);
       replaceButtons();
     } else if(divNum === 16) {
-      // todo1
       paint90Line();
       paint180Line();
       paint45Line();
       paint135Line();
-      paint27Line();
+      paintDegreeLine(22.5);
+      paintDegreeLine(45 + 22.5);
+      paintDegreeLine(90 + 22.5);
+      paintDegreeLine(135 + 22.5);
+      paintDegreeLine(180 + 22.5);
+      paintDegreeLine(225 + 22.5);
+      paintDegreeLine(270 + 22.5);
+      paintDegreeLine(315 + 22.5);
       addMirror(divNum);
       replaceButtons();
     }  else {
