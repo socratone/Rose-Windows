@@ -117,19 +117,24 @@ function addMirror(divNum) {
   }
 }
 
+// 지우기 버튼을 눌렀을 때
+function clickEraseButton() {
+  for(let i = 0; i < ctx.length; i++) {
+    ctx[i].clearRect(0, 0, 500, 500);
+  }
+}
+
+function clickEraseGridButton() {
+  backGroundCanvas.classList.toggle('clickedEraseGridButton');
+}
+
 const grid1 = document.getElementById('grid1');
 function addSaveButton() { // 캡쳐 버튼 생성
   const saveButton = document.createElement('button');
   saveButton.id = 'saveButton';
   saveButton.innerText = '저장하기';
   grid1.append(saveButton);
-}
-
-// 지우기 버튼을 눌렀을 때
-function clickEraseButton() {
-  for(let i = 0; i < ctx.length; i++) {
-    ctx[i].clearRect(0, 0, 500, 500);
-  }
+  // todo
 }
 
 let eraseButton;
@@ -141,11 +146,21 @@ function addEraseButton() { // 지우기 버튼 생성
   eraseButton.addEventListener('click', clickEraseButton);
 }
 
+let eraseGridButton;
+function addEraseGridButton() {
+  eraseGridButton = document.createElement('button');
+  eraseGridButton.id = 'eraseGridButton';
+  eraseGridButton.innerText = '격자 지우기';
+  grid1.append(eraseGridButton);
+  eraseGridButton.addEventListener('click', clickEraseGridButton);
+}
+
 function replaceButtons() {
   numInput.remove();
   numButton.remove();
   addSaveButton();
   addEraseButton();
+  addEraseGridButton();
 }
 
 let divNum;
@@ -186,7 +201,7 @@ function clickNumButton() {
       addMirror(divNum);
       replaceButtons();
     }  else {
-      alert('2, 4, 8 중의 숫자를 입력해주세요.')
+      alert('2, 4, 8, 16 중의 숫자를 입력해주세요.')
     }
   } else {
     alert('숫자를 입력해주세요.');
@@ -402,3 +417,4 @@ canvas[0].addEventListener('mousedown', mouseDown);
 canvas[0].addEventListener('mouseup', mouseUp);
 canvas[0].addEventListener('mouseout', mouseOut);
 
+// todo 16 divided에서 화면 넘어가는 것 방지
