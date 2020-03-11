@@ -126,6 +126,12 @@ function clickEraseButton() {
 
 function clickEraseGridButton() {
   backGroundCanvas.classList.toggle('clickedEraseGridButton');
+  let hasClass = backGroundCanvas.classList.contains('clickedEraseGridButton');
+  if(hasClass) {
+    eraseGridButton.innerText = '격자 되돌리기';
+  } else {
+    eraseGridButton.innerText = '격자 지우기';
+  }
 }
 
 const grid1 = document.getElementById('grid1');
