@@ -128,9 +128,9 @@ function clickEraseGridButton() {
   backGroundCanvas.classList.toggle('clickedEraseGridButton');
   let hasClass = backGroundCanvas.classList.contains('clickedEraseGridButton');
   if(hasClass) {
-    eraseGridButton.innerText = '격자 되돌리기';
+    eraseGridButton.innerText = '격자 보이기';
   } else {
-    eraseGridButton.innerText = '격자 지우기';
+    eraseGridButton.innerText = '격자 감추기';
   }
 }
 
