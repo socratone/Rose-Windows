@@ -134,13 +134,53 @@ function clickEraseGridButton() {
   }
 }
 
+let screenShot;
+function drawImg(imgData) {
+  return new Promise(function resolve() {
+    screenShot = document.createElement('canvas'); // 스크린샷용 임시 canvas를 만든다.
+    screenShot.classList.add('canvas');
+    canvasGrid.append(screenShot);
+    const ctx = screenShot.getContext('2d');
+    ctx.clearRect(0, 0, 500, 500); // canvas 초기화
+    const imageObj = new Image();
+    imageObj.onload = function() {
+      ctx.drawImage(imageObj, 10, 10); // canvas에 이미지를 그린다.
+    };
+    imageObj.src = imgData;
+  }, function reject() {});
+}
+
+function saveAs(url, filename) {
+  const link = document.createElement('a');
+  if(typeof link.download === 'string') {
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } else {
+    window.open(url);
+  }
+}
+
+function clickSaveButton() {
+  // canvasGrid 스크린샷
+  html2canvas(canvasGrid).then(function (canvas) {
+    drawImg(canvas.toDataURL('image/jpeg'));
+    saveAs(canvas.toDataURL(), 'rose-windows.jpg');
+    screenShot.remove();
+  }).catch(function (err) {
+    console.log(err);
+  });
+}
+
 const grid1 = document.getElementById('grid1');
 function addSaveButton() { // 캡쳐 버튼 생성
   const saveButton = document.createElement('button');
   saveButton.id = 'saveButton';
   saveButton.innerText = '저장하기';
   grid1.append(saveButton);
-  // todo
+  saveButton.addEventListener('click', clickSaveButton);
 }
 
 let eraseButton;
@@ -165,8 +205,8 @@ function replaceButtons() {
   numInput.remove();
   numButton.remove();
   addSaveButton();
-  addEraseButton();
   addEraseGridButton();
+  addEraseButton();
 }
 
 let divNum;
@@ -336,7 +376,6 @@ function mouseMove(event) {
         ctx[7].stroke(); 
       }
     } else if(divNum === 16) {
-      // todo
       ctx[2].lineTo(rotateX(45, x, y), rotateY(45, x, y));
       ctx[4].lineTo(rotateX(90, x, y), rotateY(90, x, y));
       ctx[6].lineTo(rotateX(135, x, y), rotateY(135, x, y));
@@ -422,5 +461,3 @@ canvas[0].addEventListener('mousemove', mouseMove);
 canvas[0].addEventListener('mousedown', mouseDown);
 canvas[0].addEventListener('mouseup', mouseUp);
 canvas[0].addEventListener('mouseout', mouseOut);
-
-// todo 16 divided에서 화면 넘어가는 것 방지
